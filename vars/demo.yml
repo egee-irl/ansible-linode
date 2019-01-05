@@ -4,9 +4,8 @@ git_url: "https://github.com/Egeeio/game-server-containers.git"
 docker_users:
   - gsc
 authorized_keys:
-  - "./id_rsa.pub"
+  - "./id_rsa.pub" # Path to your pub key
 docker_compose_version: "1.23.1"
-security_ssh_port: 22
 ufw_rules:
     # SSH
   - rule: allow
