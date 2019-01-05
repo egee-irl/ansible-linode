@@ -25,4 +25,4 @@ Once you've installed Ansible and the roles from Ansible Galaxy:
 2. Add the ip address to your Linode instance to the `./inventory` file
 3. Run `ansible-playbook demo.yml` from this repo's directory
 
-If you get stuck, watch the video I made here 👉 https://youtu.be/mcP_oxZTW9A
+If you get stuck, watch the video I made here 👉 <https://youtu.be/mcP_oxZTW9A>
