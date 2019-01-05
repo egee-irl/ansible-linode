@@ -18,7 +18,8 @@
         state: present
         key: "{{ item }}"
       with_file: "{{ authorized_keys }}"
-    - lineinfile:
+    - name: Add uid hook to bashrc
+      lineinfile:
         path: /home/gsc/.bashrc
         insertafter: 'EOF'
         line: 'export uid=${UID}'
