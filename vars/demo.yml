@@ -1,0 +1,22 @@
+git_user: "gsc"
+git_dir: "game-server-containers"
+git_url: "https://github.com/Egeeio/game-server-containers.git"
+docker_users:
+  - gsc
+authorized_keys:
+  - "./id_rsa.pub"
+docker_compose_version: "1.23.1"
+security_ssh_port: 22
+ufw_rules:
+    # SSH
+  - rule: allow
+    to_port: 22
+    protocol: tcp
+
+    # Minecraft
+  - rule: 'allow'
+    to_port: 25565
+    protocol: tcp
+  - rule: 'allow'
+    to_port: 25575
+    protocol: tcp

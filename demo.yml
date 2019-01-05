@@ -1,0 +1,34 @@
+- hosts: demo
+  become: true
+  gather_facts: false
+  pre_tasks:
+    - raw: test -e /usr/bin/python || (apt-get -y update && apt-get install -y python-minimal)
+    - setup:
+  vars_files:
+    - vars/demo.yml
+  roles:
+    - gsc-user
+    - geerlingguy.security
+    - geerlingguy.docker
+    - oefenweb.ufw
+  tasks:
+    - name: Authorize gsc user
+      authorized_key:
+        user: "gsc"
+        state: present
+        key: "{{ item }}"
+      with_file: "{{ authorized_keys }}"
+    - lineinfile:
+        path: /home/gsc/.bashrc
+        insertafter: 'EOF'
+        line: 'export uid=${UID}'
+    - name: Clone required repo
+      git:
+        repo: "{{ git_url }}"
+        dest: "/home/{{ git_user }}/{{ git_dir }}"
+    - name: Fix ownership of the directory
+      file:
+        path: "/home/{{ git_user }}/{{ git_dir }}"
+        owner: "{{ git_user }}"
+        group: "{{ git_user }}"
+        recurse: yes
